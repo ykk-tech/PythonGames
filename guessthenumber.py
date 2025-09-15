@@ -11,7 +11,7 @@ print("I have selected a number between 1 and 100. Can you guess what it is?")
 time.sleep(1)
 
 while isrunning:
-        number = input("Please enter a number between 1 and 100: ")
+        number = int(input("Please enter a number between 1 and 100: "))
         if number < 1 or number > 100:
             print("Invalid input! Please enter a number between 1 and 100.")
             time.sleep(0.5)
