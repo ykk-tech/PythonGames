@@ -3,17 +3,43 @@ import time
 
 isrunning = True
 attempts = 0
-correct_number = random.randint(1, 100)
+numto = 100
 
+def askfornum():
+    global numto
+    que = int(input("Before we start, do you want to choose a number to go to or do go-to 100? (1/2): "))
+    time.sleep(1)
+    if que == 1:
+        globalnumquestion = int(input("Please enter the number you want to go to: "))
+        if globalnumquestion <= 0:
+            print("Invalid Input. Please try again.")
+            time.sleep(1)
+            askfornum()
+        else:
+            numto = globalnumquestion
+            print("The number has been chosen. You will not see this again.")
+            time.sleep(1)
+    elif que == 2:
+        print("Okay! Going to 100.")
+        time.sleep(1)
+    else:
+        print("Invalid Input. An error has occourred. Please try again.")
+        time.sleep(1)
+        askfornum()
+
+askfornum()
+print("You will not see this again unless you re-run the script.")
+correct_number = random.randint(1, numto)
+time.sleep(1)
 print("Welcome to Guess the Number!")
 time.sleep(1)
-print("I have selected a number between 1 and 100. Can you guess what it is?")
+print(f"I have selected a number between 1 and {numto} Can you guess what it is?")
 time.sleep(1)
 
 while isrunning:
-        number = int(input("Please enter a number between 1 and 100: "))
-        if number < 1 or number > 100:
-            print("Invalid input! Please enter a number between 1 and 100.")
+        number = int(input(f"Please enter a number between 1 and {numto}: "))
+        if number < 1 or number > numto:
+            print(f"Invalid input! Please enter a number between 1 and {numto}")
             time.sleep(0.5)
             continue
         if number == correct_number:
@@ -22,7 +48,7 @@ while isrunning:
             play_again = input("Would you like to play again? (yes/no): ").strip().lower()
             if play_again == 'yes':
                 attempts = 0
-                correct_number = random.randint(1, 100)
+                correct_number = random.randint(1, numto)
                 print("A new number has been generated. Let's play again!")
                 time.sleep(0.5)
             elif play_again == 'no':
@@ -42,5 +68,5 @@ while isrunning:
             print(f"Too high! You guessed {number}, but the correct number is lower. You have had {attempts} attempts.")
             time.sleep(1)
         else:
-            print("Invalid input! Please enter a number between 1 and 100.")
+            print(f"Invalid input! Please enter a number between 1 and {numto}.")
             time.sleep(1)
